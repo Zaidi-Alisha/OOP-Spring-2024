@@ -1,0 +1,66 @@
+﻿/*
+ *Programmer: Alisha Zaidi
+ *Date: 20th Feb 2024
+ *Question 4
+ */
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+//Replacing the furniture array to furniture pointer
+class Office {
+private:
+    string Location;
+    int SeatingCapacity;
+    string *Furniture;
+
+public:
+    //Pointer will accept the size of furniture array instead of array itself
+    Office(string location = "", int seatingCapacity = 0, int furnitureSize = 3) : Location(location), SeatingCapacity(seatingCapacity) {
+        Furniture = new string[furnitureSize]; // allocating memory
+        for (int i = 0; i < furnitureSize; i++) {
+            Furniture[i] = "";
+        }//close for loop
+    }//end of parameterized constructor
+
+    //Creating function
+    void setFurniture(int index, string item) {
+        if (index >= 0 && index < 3) {
+            Furniture[index] = item;
+        }//end if
+    }//end function
+
+    //Display the details of the office class
+    void DisplayOffice() {
+        cout << "Location: " << Location << endl;
+        cout << "Seating Capacity: " << SeatingCapacity << endl;
+        cout << "Furnitures present: ";
+        for (int i = 0; i < 3; i++) {
+            cout << Furniture[i] << ",";
+        }//end for
+        cout << endl;
+    }//end function
+
+    //Destructor
+    ~Office() {
+        delete[] Furniture; // deallocating memory
+    }
+};//end class
+
+int main() {
+    Office *office = new Office("Gulshan", 29);
+    
+    //Use arrows for dealing with pointers
+    office->setFurniture(0, "Desk");
+    office->setFurniture(1,"PCs");
+    office->setFurniture(2, "Chairs");
+
+    office->DisplayOffice();
+    
+    //calling destructor
+    delete office;
+
+    return 0;
+}//end main
